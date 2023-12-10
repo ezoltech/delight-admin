@@ -60,14 +60,6 @@ const AdminData = () => {
                   <Button
                     className="flex flex-row gap-4"
                     size="sm"
-                    color="dark"
-                  >
-                    <FaEdit />
-                    Edit
-                  </Button>
-                  <Button
-                    className="flex flex-row gap-4"
-                    size="sm"
                     color="failure"
                   >
                     <MdDelete />
@@ -84,14 +76,6 @@ const AdminData = () => {
                 <Table.Cell>$99</Table.Cell>
                 <Table.Cell>$2999</Table.Cell>
                 <Table.Cell className="flex flex-row gap-6">
-                  <Button
-                    className="flex flex-row gap-4"
-                    size="sm"
-                    color="dark"
-                  >
-                    <FaEdit />
-                    Edit
-                  </Button>
                   <Button
                     className="flex flex-row gap-4"
                     size="sm"

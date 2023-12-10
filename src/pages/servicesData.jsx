@@ -3,9 +3,12 @@ import { Table, Card, Button } from "flowbite-react";
 import { CiSettings } from "react-icons/ci";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { ServiceCommands } from "../components/serviceCommands";
 const ServicesData = () => {
   return (
     <div>
+      <ServiceCommands />
+
       <Card className="m-8">
         <div className="overflow-hidden">
           <Table>

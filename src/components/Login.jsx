@@ -2,8 +2,8 @@ import React from "react";
 import { Card, Button, Label, TextInput } from "flowbite-react";
 const Login = () => {
   return (
-    <div>
-      {/* <Card className="w-[400px] h-[450px]">
+    <div className="flex justify-center items-center">
+      <Card className="w-[400px] h-[450px]">
         <form className="flex  flex-col gap-4">
           <div>
             <div className="mb-2 block">
@@ -27,14 +27,13 @@ const Login = () => {
           <div className="flex justify-end items-end mt-7">
             <p>
               don't you have an account?,{" "}
-              <a href="/signup" className="font-bold">
+              <a href="/" className="font-bold">
                 signup
               </a>
             </p>
           </div>
         </form>
-      </Card> */}
-      <h2>hello login</h2>
+      </Card>
     </div>
   );
 };

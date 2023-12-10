@@ -2,24 +2,37 @@ import React, { useState } from "react";
 import { Card, Button, Label, TextInput } from "flowbite-react";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../utils/utils";
+
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleSignup = async () => {
+  const navigate = useNavigate();
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
     try {
-      const response = await axios.post("https://localhost:3000/admin/create", {
+      // Check if email already exists
+      // const response = await axios.get(
+      //   `${BASE_URL}/admin/getemail?email=${email}`
+      // );
+      // if (response.data.email) {
+      //   toast.error("Email already exists!");
+      // } else {
+
+      const createResponse = await axios.post(BASE_URL + "/admin/create", {
         email,
         password,
       });
-      toast.success("error signing up!, please try again", {
-        duration: 7000,
-      });
+      console.log(createResponse);
+      if (createResponse.status == 200) {
+        toast.success("New admin created successfully!");
+        navigate("/main");
+      }
     } catch (error) {
-      toast.error("error signing up!, please try again", {
-        duration: 7000,
-      });
-      console.error(error.response.data);
+      console.error("Error signing up:", error);
+      toast.error("Error signing up, please try again");
     }
   };
 
@@ -27,7 +40,7 @@ const Signup = () => {
     <div className="flex justify-center items-center m-8">
       <Toaster />
       <Card className="w-[400px] h-[450px]">
-        <form className="flex  flex-col gap-4">
+        <form className="flex flex-col gap-4" onSubmit={handleSignup}>
           <div>
             <div className="mb-2 block">
               <Label htmlFor="email1" value="Your email" />
@@ -54,16 +67,13 @@ const Signup = () => {
             />
           </div>
 
-          <Button type="submit" onClick={handleSignup}>
-            Register
-          </Button>
+          <Button type="submit">Register</Button>
           <div className="flex justify-end items-end mt-7">
             <p>
-              already have an account?,{" "}
-              {/* <p href="/login" className="font-bold">
-                login
-              </p> */}
-              <Link to="/login">Login</Link>
+              Already have an account?{" "}
+              <a href="/login" className="font-bold">
+                Login
+              </a>
             </p>
           </div>
         </form>
@@ -71,4 +81,5 @@ const Signup = () => {
     </div>
   );
 };
+
 export default Signup;

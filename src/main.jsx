@@ -11,6 +11,7 @@ import ServicesData from "./pages/servicesData";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import MainAdminPage from "./pages/MainAdminPage";
+import Notfound from "./pages/Notfound";
 // import Home from "./pages/Home";
 const router = createBrowserRouter([
   {
@@ -29,24 +30,11 @@ const router = createBrowserRouter([
       {
         path: "/main",
         element: <MainAdminPage />,
-        children: [
-          {
-            path: "/admin",
-            element: <AdminData />,
-          },
-          {
-            path: "/contents",
-            element: <ContentData />,
-          },
-          {
-            path: "/contact",
-            element: <ContactData />,
-          },
-          {
-            path: "/services",
-            element: <ServicesData />,
-          },
-        ],
+      },
+     
+      {
+        path: "/*",
+        element: <Notfound />,
       },
     ],
   },

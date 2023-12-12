@@ -6,7 +6,7 @@ import { MdDelete } from "react-icons/md";
 import { ServiceCommands } from "../components/serviceCommands";
 const ServicesData = () => {
   return (
-    <div>
+    <div id="service-data">
       <ServiceCommands />
 
       <Card className="m-8">

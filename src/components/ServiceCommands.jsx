@@ -9,6 +9,7 @@ import {
 } from "flowbite-react";
 
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { Logout } from "./Logout";
 export const ServiceCommands = () => {
   const [openModal, setOpenModal] = useState(false);
   const [openMod, setOpenMod] = useState(false);
@@ -110,8 +111,15 @@ export const ServiceCommands = () => {
           </Button>
         </div>
         <div className="flex flex-row justify-end gap-5">
-          <div className=""></div>
-          <Button>Logout</Button>
+          <div className="flex flex-row justify-end">
+            <div className="">
+              <Button disabled className="flex flex-col gap-2">
+                admin@gmail.com
+                <h2>joined at 2020</h2>
+              </Button>
+            </div>
+            <Logout />
+          </div>
         </div>
       </div>
     </>

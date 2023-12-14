@@ -31,7 +31,10 @@ const router = createBrowserRouter([
         path: "/main",
         element: <MainAdminPage />,
       },
-     
+      {
+        path: "/service",
+        element: <ServicesData />,
+      },
       {
         path: "/*",
         element: <Notfound />,

@@ -10,6 +10,7 @@ import {
 
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { Logout } from "./Logout";
+import { AdminInfo } from "./adminInfo";
 export const ContentCommands = () => {
   const [openModal, setOpenModal] = useState(false);
   const [openMod, setOpenMod] = useState(false);
@@ -43,7 +44,13 @@ export const ContentCommands = () => {
                   Are you sure you want to clear the entire data?
                 </h3>
                 <div className="flex justify-center gap-4">
-                  <Button color="failure" onClick={() => setOpenModal(false)}>
+                  <Button
+                    color="failure"
+                    onClick={() => {
+                      setOpenModal(false);
+                      handleClearData();
+                    }}
+                  >
                     {"Yes, I'm sure"}
                   </Button>
                   <Button color="gray" onClick={() => setOpenModal(false)}>
@@ -102,14 +109,9 @@ export const ContentCommands = () => {
             clear data
           </Button>
         </div>
-        <div className="flex flex-row justify-end">
-          <div className="">
-            <Button disabled className="flex flex-col gap-2">
-              admin@gmail.com
-              <h2>joined at 2020</h2>
-            </Button>
-          </div>
-          <Logout />
+        <div className="flex flex-row  justify-between gap-5">
+          <AdminInfo />
+          <Logout className="ml-24" />
         </div>
       </div>
     </>

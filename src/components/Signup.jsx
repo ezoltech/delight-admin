@@ -20,9 +20,8 @@ const Signup = () => {
       });
       // console.log(createResponse.status);
       if (createResponse.status == 200) {
-        toast.success("New admin created successfully!", { duration: 7000 });
         navigate("/main");
-        window.alert("toast");
+        toast.success("New admin created successfully!", { duration: 7000 });
       }
     } catch (error) {
       console.error("Error signing up:", error);

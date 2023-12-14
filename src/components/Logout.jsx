@@ -6,7 +6,7 @@ export const Logout = () => {
   const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
   return (
-    <div>
+    <div className="ml-4">
       <Button onClick={() => setOpenModal(true)}>Logout</Button>
       <div className="">
         <Modal

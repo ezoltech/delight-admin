@@ -12,6 +12,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import MainAdminPage from "./pages/MainAdminPage";
 import Notfound from "./pages/Notfound";
+import Base from "./pages/Base";
 // import Home from "./pages/Home";
 const router = createBrowserRouter([
   {
@@ -35,6 +36,16 @@ const router = createBrowserRouter([
         path: "/service",
         element: <ServicesData />,
       },
+
+      {
+        path: "/base",
+        element: <Base />,
+      },
+
+      // {
+      //   path: "/contents",
+      //   element: <ContentData />,
+      // },
       {
         path: "/*",
         element: <Notfound />,

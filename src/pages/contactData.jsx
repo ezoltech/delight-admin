@@ -22,7 +22,7 @@ const ContactData = () => {
     fetchContacts();
   }, []);
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4" id="contact">
       <ContactCommands />
       <Card className="m-8">
         <div className="overflow-hidden">

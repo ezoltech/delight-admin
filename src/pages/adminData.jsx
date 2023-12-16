@@ -53,7 +53,7 @@ const AdminData = ({}) => {
   };
 
   return (
-    <div>
+    <div id="admin">
       <div className="modal">
         {openModal && (
           <Modal

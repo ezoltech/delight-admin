@@ -1,13 +1,14 @@
 // import { Button } from "flowbite-react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ContactData from "./contactData";
 import ContentData from "./contentData";
 import ServicesData from "./servicesData";
 import AdminData from "./adminData";
+
 const MainAdminPage = () => {
   const [route, setRoute] = useState("/content");
 
-  const PageContent = () => {
+  const PageContent = React.memo(() => {
     switch (route) {
       case "/a":
         return <ContentData />;
@@ -20,13 +21,36 @@ const MainAdminPage = () => {
       default:
         return <ContentData />;
     }
+  }, [route]);
+
+  const HandleRoute = (newRoute) => {
+    setRoute(newRoute);
   };
 
-  const HandleRoute = (routes) => {
-    setRoute(routes);
-  };
+  useEffect(() => {
+    // Fetch data only when route changes
+    // Update component state based on fetched data
+    switch (route) {
+      case "/a":
+        // Fetch content data and update state with data
+        break;
+      case "/b":
+        // Fetch admin data and update state with data
+        break;
+      case "/c":
+        // Fetch services data and update state with data
+        break;
+      case "/d":
+        // Fetch contact data and update state with data
+        break;
+      default:
+        // Fetch default content data and update state with data
+        break;
+    }
+  }, [route]);
+
   return (
-    <div>
+    <div className="flex flex-col gap-14">
       <div className="flex justify-center items-center">
         <nav className="bg-white px-2 py-2.5 dark:border-gray-700 dark:bg-gray-800 sm:px-4 rounded">
           <div className="mx-auto flex flex-wrap items-center justify-between">
@@ -91,8 +115,13 @@ const MainAdminPage = () => {
           </div>
         </nav>
       </div>
-      <PageContent />
-      {/* {/* <Navbar fluid rounded>
+      {/* <PageContent /> */}
+      {/* <ServicesData /> */}
+      {/* <ContactData /> */}
+      {/* <AdminData /> */}
+      <ContentData />
+
+      {/* <Navbar fluid rounded>
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Navbar.Link onClick={HandleRoute("contents")}>
@@ -106,9 +135,44 @@ const MainAdminPage = () => {
           </Navbar.Link>
           <Navbar.Link onClick={HandleRoute("admin")}>admin data </Navbar.Link>
         </Navbar.Collapse>
-      </Navbar> */}
+      </Navbar>
 
       {/* <Nav />  */}
+      {/* <Nav /> */}
+      {/* <div className="flex flex-col gap-4 justify-center ">
+        <h2 className="justify-center items-center font-bold text-2xl">
+          Content Data
+        </h2>
+        <ContentData />
+      </div>
+
+      <div className="flex flex-col gap-4 justify-center items-center">
+        <h2 className="justify-center items-center font-bold text-2xl">
+          Content Data
+        </h2>
+        <ContentData />
+      </div>
+
+      <div className="flex flex-col gap-4 justify-center items-center">
+        <h2 className="justify-center items-center font-bold text-2xl">
+          Service Data
+        </h2>
+        <ServicesData />
+      </div>
+
+      <div className="flex flex-col gap-4 justify-center items-center">
+        <h2 className="justify-center items-center font-bold text-2xl">
+          Contact Data
+        </h2>
+        <ContactData />
+      </div>
+
+      <div className="flex flex-col gap-4 justify-center items-center">
+        <h2 className="justify-center items-center font-bold text-2xl">
+          Admin Data
+        </h2>
+        <AdminData />
+      </div> */}
     </div>
   );
 };

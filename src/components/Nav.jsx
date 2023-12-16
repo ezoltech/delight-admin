@@ -5,14 +5,15 @@ export const Nav = () => {
   const navigate = new useNavigate();
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center top-0 sticky z-10">
       <Navbar fluid rounded>
         <Navbar.Toggle />
         <Navbar.Collapse>
-          <Navbar.Link><Button onClick={navigate('/')}>content data</Button></Navbar.Link>
-          <Navbar.Link href="/main/contact">contact data</Navbar.Link>
-          <Navbar.Link href="/main/services">services data</Navbar.Link>
-          <Navbar.Link href="/main/admin">admin data </Navbar.Link>
+          <Navbar.Link href="#content">content data</Navbar.Link>
+          <Navbar.Link href="#contact">contact data</Navbar.Link>
+          <Navbar.Link href="#services">services data</Navbar.Link>
+          <Navbar.Link href="#gallery">gallery data</Navbar.Link>
+          <Navbar.Link href="#admin">admin data </Navbar.Link>
         </Navbar.Collapse>
       </Navbar>
     </div>

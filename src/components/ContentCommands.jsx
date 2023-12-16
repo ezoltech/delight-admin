@@ -61,13 +61,15 @@ export const ContentCommands = () => {
             </Modal.Body>
           </Modal>
         </div>
+
+
         <div className="add modal">
-          <Modal show={openMod} size="md" onClose={onCloseMod} popup>
+          <Modal show={openMod} size="md" onClose={onCloseMod} popup dismisable>
             <Modal.Header />
             <Modal.Body>
               <div className="space-y-6">
                 <h3 className="text-xl font-medium text-gray-900 dark:text-white">
-                  Add content
+                  Add New content
                 </h3>
                 <div>
                   <div className="mb-2 block">

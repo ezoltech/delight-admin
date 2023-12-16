@@ -12,7 +12,9 @@ export const ServiceCommands = () => {
   const [openModal, setOpenModal] = useState(false);
   const [openMod, setOpenMod] = useState(false);
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [includes, setIncludes] = useState("");
+  const [places, setPlaces] = useState("");
+  const [duration, setDuration] = useState("");
   const [price, setPrice] = useState("");
 
   const onCloseModal = () => {
@@ -27,13 +29,15 @@ export const ServiceCommands = () => {
     // e.preventDefault();
     try {
       const createResponse = await axios.post(`${BASE_URL}/services/create`, {
-        title,
-        description,
-        price,
+        title: title || "some package",
+        includes,
+        places: places || "Some where in addis",
+        duration: duration || "some day",
+        price: price || "some bucks",
       });
       if (createResponse.status === 200) {
-        setOpenModal(false);
         toast.success("New service created successfully!", { duration: 7000 });
+        setOpenModal(false);
       }
     } catch (error) {
       console.error("Error creating service:", error);
@@ -115,16 +119,39 @@ export const ServiceCommands = () => {
               </div>
               <div>
                 <div className="mb-2 block">
-                  <Label htmlFor="description" value="Description" />
+                  <Label htmlFor="includes" value="Includes" />
                 </div>
-                <Textarea
-                  id="description"
-                  placeholder="Add description"
-                  value={description}
-                  onChange={(event) => setDescription(event.target.value)}
+                <TextInput
+                  id="includes"
+                  placeholder="Add includes"
+                  value={includes}
+                  onChange={(event) => setIncludes(event.target.value)}
                   required
                 />
               </div>
+
+              <div className="mb-2 block">
+                <Label htmlFor="places" value="Places" />
+              </div>
+              <TextInput
+                id="places"
+                placeholder="Add places"
+                value={places}
+                onChange={(event) => setPlaces(event.target.value)}
+                required
+              />
+
+              <div className="mb-2 block">
+                <Label htmlFor="duration" value="Duration" />
+              </div>
+              <TextInput
+                id="duration"
+                placeholder="Add duartion"
+                value={duration}
+                onChange={(event) => setDuration(event.target.value)}
+                required
+              />
+
               <div>
                 <div className="mb-2 block">
                   <Label htmlFor="price" value="Price" />

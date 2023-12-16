@@ -15,12 +15,14 @@ import { MdDelete } from "react-icons/md";
 import { ServiceCommands } from "../components/serviceCommands";
 import { LottieAnimation } from "../components/LottieAnimation";
 import { BASE_URL } from "../utils/utils";
-
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 const ServicesData = () => {
   const [services, setServices] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [includes, setIncludes] = useState("");
+  const [places, setPlaces] = useState("");
+  const [duration, setDuration] = useState("");
   const [price, setPrice] = useState("");
   const [selectedServiceId, setSelectedServiceId] = useState(null);
 
@@ -54,7 +56,9 @@ const ServicesData = () => {
     try {
       const response = await axios.put(`${BASE_URL}/services/update/${id}`, {
         title: title,
-        description: description,
+        includes: includes,
+        places: places,
+        duration: duration,
         price: price,
       });
 
@@ -68,13 +72,16 @@ const ServicesData = () => {
   const openEditModal = (
     id,
     initialTitle,
-    initialDescription,
+    initialIncludes,
+    initialPlaces,
+    initialDuration,
     initialPrice
   ) => {
-    setSelectedServiceId(id);
-    setTitle(initialTitle);
-    setDescription(initialDescription);
-    setPrice(initialPrice);
+    setSelectedServiceId(id), setTitle(initialTitle);
+    setIncludes(initialIncludes),
+      setPlaces(initialPlaces),
+      setDuration(initialDuration),
+      setPrice(initialPrice);
     setOpenModal(true);
   };
 
@@ -83,7 +90,7 @@ const ServicesData = () => {
   };
 
   return (
-    <div id="service-data">
+    <div id="service">
       <ServiceCommands />
       <div className="edit modal">
         <Modal
@@ -114,13 +121,35 @@ const ServicesData = () => {
                 </div>
                 <div>
                   <div className="mb-2 block">
-                    <Label htmlFor="description" value="Description" />
+                    <Label htmlFor="includes" value="Includes" />
                   </div>
-                  <Textarea
-                    id="description"
-                    placeholder="Edit description"
-                    value={description}
-                    onChange={(event) => setDescription(event.target.value)}
+                  <TextInput
+                    id="Includes"
+                    placeholder="Edit Includes"
+                    value={includes}
+                    onChange={(event) => setIncludes(event.target.value)}
+                    required
+                  />
+
+                  <div className="mb-2 block">
+                    <Label htmlFor="places" value="Places" />
+                  </div>
+                  <TextInput
+                    id="places"
+                    placeholder="Edit Places"
+                    value={places}
+                    onChange={(event) => setPlaces(event.target.value)}
+                    required
+                  />
+
+                  <div className="mb-2 block">
+                    <Label htmlFor="duration" value="Duration" />
+                  </div>
+                  <TextInput
+                    id="duration"
+                    placeholder="Edit Duration"
+                    value={duration}
+                    onChange={(event) => setDuration(event.target.value)}
                     required
                   />
                 </div>
@@ -154,8 +183,10 @@ const ServicesData = () => {
               <Table.Head>
                 <Table.HeadCell className="w-[4px]">ID</Table.HeadCell>
                 <Table.HeadCell>title</Table.HeadCell>
-                <Table.HeadCell> service description</Table.HeadCell>
-                <Table.HeadCell> price</Table.HeadCell>
+                <Table.HeadCell>Includes</Table.HeadCell>
+                <Table.HeadCell>Places</Table.HeadCell>
+                <Table.HeadCell>Duration</Table.HeadCell>
+                <Table.HeadCell>price</Table.HeadCell>
                 <Table.HeadCell>created at</Table.HeadCell>
                 <Table.HeadCell>updated at</Table.HeadCell>
                 <Table.HeadCell className="flex flex-row gap-3">
@@ -173,7 +204,9 @@ const ServicesData = () => {
                       {index + 1}
                     </Table.Cell>
                     <Table.Cell>{service.title}</Table.Cell>
-                    <Table.Cell>{service.description}</Table.Cell>
+                    <Table.Cell>{service.includes}</Table.Cell>
+                    <Table.Cell>{service.places}</Table.Cell>
+                    <Table.Cell>{service.duration}</Table.Cell>
                     <Table.Cell>{service.price}</Table.Cell>
                     <Table.Cell>{service.created_at}</Table.Cell>
                     <Table.Cell>{service.updated_at}</Table.Cell>
@@ -186,7 +219,9 @@ const ServicesData = () => {
                           openEditModal(
                             service.id,
                             service.title,
-                            service.description,
+                            service.includes,
+                            service.places,
+                            service.duration,
                             service.price
                           )
                         }

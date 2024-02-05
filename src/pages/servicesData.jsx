@@ -12,10 +12,11 @@ import {
 import { CiSettings } from "react-icons/ci";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { ServiceCommands } from "../components/serviceCommands";
+
 import { LottieAnimation } from "../components/LottieAnimation";
 import { BASE_URL } from "../utils/utils";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { ServiceCommands } from "../components/ServiceCommands";
 import Special from "./Special";
 const ServicesData = () => {
   const [services, setServices] = useState([]);

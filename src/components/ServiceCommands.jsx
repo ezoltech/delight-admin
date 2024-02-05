@@ -8,7 +8,6 @@ import { BASE_URL } from "../utils/utils";
 import { toast, Toaster } from "react-hot-toast";
 // import { useNavigate } from "react-router-dom";
 export const ServiceCommands = () => {
-  // const navigate = new useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const [openMod, setOpenMod] = useState(false);
   const [title, setTitle] = useState("");

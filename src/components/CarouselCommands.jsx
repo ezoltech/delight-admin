@@ -17,7 +17,7 @@ import { Logout } from "./Logout";
 import { Toaster, toast } from "react-hot-toast";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
-export const ContentCommands = () => {
+export const CarouselCommands = () => {
   const [openModal, setOpenModal] = useState(false);
   const [openMod, setOpenMod] = useState(false);
   const [title, setTitle] = useState("");
@@ -25,8 +25,8 @@ export const ContentCommands = () => {
   const [file, setFile] = useState(null);
   const [place, setPlace] = useState("");
 
-  const handleAddContent = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+  const handleAddCarousel = async (e) => {
+    e.preventDefault();
 
     try {
       const formData = new FormData();
@@ -36,7 +36,7 @@ export const ContentCommands = () => {
       formData.append("photo", file);
 
       const response = await axios.post(
-        `${BASE_URL}/contents/create`,
+        `${BASE_URL}/carousel/create`,
         formData,
         {
           headers: {
@@ -47,7 +47,7 @@ export const ContentCommands = () => {
 
       console.log(response.data);
       onCloseModal();
-      toast.success("content added successfully!");
+      toast.success("carousel added successfully!");
       window.location.reload();
     } catch (error) {
       console.error(error);
@@ -56,7 +56,7 @@ export const ContentCommands = () => {
 
   const handleDelete = async () => {
     try {
-      const response = await axios.delete(`${BASE_URL}/contents/deleteall`);
+      const response = await axios.delete(`${BASE_URL}/carousel/deleteall`);
       console.log(response.data); // Logging the response data
       toast.success("data cleared successfully");
       window.location.reload();
@@ -89,9 +89,9 @@ export const ContentCommands = () => {
         <Modal.Header />
         <Modal.Body>
           <div className="space-y-6">
-            <form onSubmit={handleAddContent}>
+            <form onSubmit={handleAddCarousel}>
               <h3 className="text-xl font-medium text-gray-900 dark:text-white">
-                Add New Content
+                Add New Carousel
               </h3>
               <div>
                 <Label htmlFor="title" value="Title" />
@@ -128,14 +128,12 @@ export const ContentCommands = () => {
                   value={place}
                   onChange={(e) => setPlace(e.target.value)}
                 >
-                  <option value="Top">Top</option>
-                  <option value="Middle">Middle</option>
-                  <option value="Carousel-First">Carousel-First</option>
-                  <option value="Carousel-Next">Carousel-Nextt</option>
+                  <option value="Top">First</option>
+                  <option value="Middle">Next</option>
                 </Select>
               </div>
               <div className="w-full flex flex-row gap-5">
-                <Button type="submit">Add Content</Button>
+                <Button type="submit">Add Carousel</Button>
                 <Button onClick={onCloseModal}>Cancel</Button>
               </div>
             </form>
@@ -205,4 +203,4 @@ export const ContentCommands = () => {
   );
 };
 
-export default ContentCommands;
+export default CarouselCommands;

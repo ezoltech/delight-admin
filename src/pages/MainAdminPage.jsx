@@ -4,20 +4,26 @@ import ContactData from "./contactData";
 import ContentData from "./contentData";
 import ServicesData from "./servicesData";
 import AdminData from "./adminData";
+import GalleryData from "./galleryData";
+import CarouselData from "./CarouselData";
 
 const MainAdminPage = () => {
   const [route, setRoute] = useState("/content");
 
   const PageContent = React.memo(() => {
     switch (route) {
-      case "/a":
+      case "/content-data":
         return <ContentData />;
-      case "/b":
+      case "/admin-data":
         return <AdminData />;
-      case "/c":
+      case "/service-data":
         return <ServicesData />;
-      case "/d":
+      case "/contact-data":
         return <ContactData />;
+      case "/gallery-data":
+        return <GalleryData />;
+      case "/carousel-data":
+        return <CarouselData />;
       default:
         return <ContentData />;
     }
@@ -50,7 +56,7 @@ const MainAdminPage = () => {
   }, [route]);
 
   return (
-    <div className="flex flex-col gap-14">
+    <div className="flex flex-col gap-14 sticky top-0">
       <div className="flex justify-center items-center">
         <nav className="bg-white px-2 py-2.5 dark:border-gray-700 dark:bg-gray-800 sm:px-4 rounded">
           <div className="mx-auto flex flex-wrap items-center justify-between">
@@ -81,7 +87,7 @@ const MainAdminPage = () => {
                 <li>
                   <a
                     className="block py-2 pr-4 pl-3 md:p-0 border-b border-gray-100 text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:hover:bg-transparent md:hover:text-cyan-700 md:dark:hover:bg-transparent md:dark:hover:text-white"
-                    onClick={() => HandleRoute("/a")}
+                    onClick={() => HandleRoute("/content-data")}
                   >
                     content data
                   </a>
@@ -89,7 +95,7 @@ const MainAdminPage = () => {
                 <li>
                   <a
                     className="block py-2 pr-4 pl-3 md:p-0 border-b border-gray-100 text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:hover:bg-transparent md:hover:text-cyan-700 md:dark:hover:bg-transparent md:dark:hover:text-white"
-                    onClick={() => HandleRoute("/d")}
+                    onClick={() => HandleRoute("/contact-data")}
                   >
                     contact data
                   </a>
@@ -97,7 +103,7 @@ const MainAdminPage = () => {
                 <li>
                   <a
                     className="block py-2 pr-4 pl-3 md:p-0 border-b border-gray-100 text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:hover:bg-transparent md:hover:text-cyan-700 md:dark:hover:bg-transparent md:dark:hover:text-white"
-                    onClick={() => HandleRoute("/c")}
+                    onClick={() => HandleRoute("/service-data")}
                   >
                     services data
                   </a>
@@ -105,9 +111,26 @@ const MainAdminPage = () => {
                 <li>
                   <a
                     className="block py-2 pr-4 pl-3 md:p-0 border-b border-gray-100 text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:hover:bg-transparent md:hover:text-cyan-700 md:dark:hover:bg-transparent md:dark:hover:text-white"
-                    onClick={() => HandleRoute("/b")}
+                    onClick={() => HandleRoute("/admin-data")}
                   >
                     admin data{" "}
+                  </a>
+                </li>
+
+                <li>
+                  <a
+                    className="block py-2 pr-4 pl-3 md:p-0 border-b border-gray-100 text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:hover:bg-transparent md:hover:text-cyan-700 md:dark:hover:bg-transparent md:dark:hover:text-white"
+                    onClick={() => HandleRoute("/gallery-data")}
+                  >
+                    gallery data{" "}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="block py-2 pr-4 pl-3 md:p-0 border-b border-gray-100 text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:hover:bg-transparent md:hover:text-cyan-700 md:dark:hover:bg-transparent md:dark:hover:text-white"
+                    onClick={() => HandleRoute("/carousel-data")}
+                  >
+                    carousel data{" "}
                   </a>
                 </li>
               </ul>
@@ -115,11 +138,7 @@ const MainAdminPage = () => {
           </div>
         </nav>
       </div>
-      {/* <PageContent /> */}
-      {/* <ServicesData /> */}
-      {/* <ContactData /> */}
-      {/* <AdminData /> */}
-      <ContentData />
+      <PageContent />
 
       {/* <Navbar fluid rounded>
         <Navbar.Toggle />

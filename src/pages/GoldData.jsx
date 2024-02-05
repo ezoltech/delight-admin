@@ -12,12 +12,10 @@ import {
 import { CiSettings } from "react-icons/ci";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { ServiceCommands } from "../components/serviceCommands";
 import { LottieAnimation } from "../components/LottieAnimation";
 import { BASE_URL } from "../utils/utils";
-import { HiOutlineExclamationCircle } from "react-icons/hi";
-import Special from "./Special";
-const ServicesData = () => {
+import { GoldCommands } from "../components/GoldCommands";
+const GoldData = () => {
   const [services, setServices] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [title, setTitle] = useState("");
@@ -30,8 +28,10 @@ const ServicesData = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/services/allservices`);
-        setServices(response.data.services);
+        const response = await axios.get(`${BASE_URL}/special/gold/getall`);
+        if (response.data && response.data.goldServices) {
+          setServices(response.data.goldServices);
+        }
       } catch (error) {
         console.error("Error fetching services:", error);
       }
@@ -42,7 +42,9 @@ const ServicesData = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await axios.delete(`${BASE_URL}/services/delete/${id}`);
+      const response = await axios.delete(
+        `${BASE_URL}/special/gold/delete/${id}`
+      );
 
       if (response.status === 200) {
         console.log("Service deleted successfully");
@@ -92,7 +94,7 @@ const ServicesData = () => {
 
   return (
     <div id="service">
-      <ServiceCommands />
+      <GoldCommands />
       <div className="edit modal">
         <Modal
           show={openModal}
@@ -250,10 +252,8 @@ const ServicesData = () => {
           )}
         </div>
       </Card>
-
-      <Special />
     </div>
   );
 };
 
-export default ServicesData;
+export default GoldData;

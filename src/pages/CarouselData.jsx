@@ -21,46 +21,32 @@ import { ContentCommands } from "../components/ContentCommands";
 import { BASE_URL } from "../utils/utils";
 import { BASE_IMAGE_URL } from "../utils/utils";
 import { LottieAnimation } from "../components/LottieAnimation";
+import CarouselCommands from "../components/CarouselCommands";
 
-const ContentData = () => {
+const CarouselData = () => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [place, setPlace] = useState("top");
   const [selectedServiceId, setSelectedServiceId] = useState(null);
-  const [contents, setContents] = useState([]);
-  const [expandedRows, setExpandedRows] = useState([]);
-
-  // Function to toggle expanded row
-  const toggleRow = (index) => {
-    const currentIndex = expandedRows.indexOf(index);
-    const newExpandedRows = [...expandedRows];
-
-    if (currentIndex === -1) {
-      newExpandedRows.push(index);
-    } else {
-      newExpandedRows.splice(currentIndex, 1);
-    }
-
-    setExpandedRows(newExpandedRows);
-  };
+  const [carousels, setCarousels] = useState([])
 
   const dummyImage = "/download.png";
 
   useEffect(() => {
-    const fetchContents = async () => {
+    const fetchCarousels = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/contents/all`);
-        setContents(response.data.contents);
-        toast.success("Content fetched successfully");
+        const response = await axios.get(`${BASE_URL}/carousel/getall`);
+        setCarousels(response.data.carousels);
+        toast.success("Carousel fetched successfully");
       } catch (error) {
-        console.error("Error fetching contents:", error);
-        toast.error("Couldn't fetch content, please try again");
+        console.error("Error fetching carousel:", error);
+        toast.error("Couldn't fetch carousel, please try again");
       }
     };
 
-    fetchContents();
+    fetchCarousels();
   }, []);
 
   useEffect(() => {
@@ -89,7 +75,7 @@ const ContentData = () => {
       }
 
       const response = await axios.put(
-        `${BASE_URL}/contents/update/${id}`,
+        `${BASE_URL}/carousel/update/${id}`,
         formData,
         {
           headers: {
@@ -122,18 +108,18 @@ const ContentData = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await axios.delete(`${BASE_URL}/contents/delete/${id}`);
+      const response = await axios.delete(`${BASE_URL}/carousel/delete/${id}`);
 
       if (response.status === 200) {
-        console.log("Content deleted successfully");
-        setContents((prevContents) =>
+        console.log("Carousel deleted successfully");
+        setCarousels((prevContents) =>
           prevContents.filter((content) => content.id !== id)
         );
-        toast.success("Content deleted successfully");
+        toast.success("Carousel deleted successfully");
       }
     } catch (error) {
-      console.error("Error deleting content:", error);
-      toast.error("Failed to delete content");
+      console.error("Error deleting carousel:", error);
+      toast.error("Failed to delete carousel");
     }
   };
 
@@ -149,7 +135,7 @@ const ContentData = () => {
     <>
       <Toaster />
       <div id="content" className="flex flex-col gap-3">
-        <ContentCommands />
+        <CarouselCommands />
         <div className="edit modal">
           <Modal
             show={openModal}
@@ -162,7 +148,7 @@ const ContentData = () => {
             <Modal.Body>
               <div className="space-y-6">
                 <h3 className="text-xl font-medium text-gray-900 dark:text-white">
-                  Edit content
+                  Edit carousel
                 </h3>
                 <div>
                   <div className="mb-2 block">
@@ -238,11 +224,8 @@ const ContentData = () => {
                       value={place}
                       onChange={(event) => setPlace(event.target.value)}
                     >
-                      <option value="Top">Top</option>
-                      <option value="Middle">Middle</option>
-                      <option value="Bottom">Bottom</option>
-                      <option value="Carousel-First">Carousel-First</option>
-                      <option value="Carousel-Next">Carousel-Next</option>
+                      <option value="Top">First</option>
+                      <option value="Middle">Next</option>
                     </Select>
                   </div>
                 </div>
@@ -259,7 +242,7 @@ const ContentData = () => {
 
         <Card className="m-8">
           <div className="overflow-hidden" style={{ overflowX: "auto" }}>
-            {contents.length > 0 ? (
+            {carousels > 0 ? (
               <Table>
                 <Table.Head>
                   <Table.HeadCell className="w-[2px]">ID</Table.HeadCell>
@@ -275,7 +258,7 @@ const ContentData = () => {
                   </Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
-                  {contents.map((content, index) => (
+                  {carousels.map((carousel, index) => (
                     <Table.Row
                       className="bg-white dark:border-gray-700 dark:bg-gray-800"
                       key={index}
@@ -283,34 +266,12 @@ const ContentData = () => {
                       <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                         {content.id}
                       </Table.Cell>
-                      <Table.Cell>{content.title}</Table.Cell>
+                      <Table.Cell>{carousel.title}</Table.Cell>
+                      <Table.Cell>{carousel.description}</Table.Cell>
                       <Table.Cell>
-                        {content.description.length > 100 &&
-                        !expandedRows.includes(index) ? (
-                          <>
-                            {`${content.description.substring(0, 100)}... `}
-                            <Button size="sm" onClick={() => toggleRow(index)}>
-                              See more
-                            </Button>
-                          </>
-                        ) : (
-                          <>
-                            {content.description}
-                            {content.description.length > 100 && (
-                              <Button
-                                size="sm"
-                                onClick={() => toggleRow(index)}
-                              >
-                                See less
-                              </Button>
-                            )}
-                          </>
-                        )}
-                      </Table.Cell>
-                      <Table.Cell>
-                        {content.photo ? (
+                        {carousel.photo ? (
                           <img
-                            src={BASE_IMAGE_URL + content.photo}
+                            src={BASE_IMAGE_URL + carousel.photo}
                             alt="Content"
                             style={{ maxWidth: "50px", maxHeight: "50px" }}
                           />
@@ -318,9 +279,9 @@ const ContentData = () => {
                           "No Photo"
                         )}
                       </Table.Cell>
-                      <Table.Cell>{content.place}</Table.Cell>
-                      <Table.Cell>{content.created_at}</Table.Cell>
-                      <Table.Cell>{content.updated_at}</Table.Cell>
+                      <Table.Cell>{carousel.place}</Table.Cell>
+                      <Table.Cell>{carousel.created_at}</Table.Cell>
+                      <Table.Cell>{carousel.updated_at}</Table.Cell>
                       <Table.Cell className="flex flex-row gap-6">
                         <Button
                           className="flex flex-row gap-4"
@@ -328,11 +289,11 @@ const ContentData = () => {
                           color="dark"
                           onClick={() =>
                             openEditModal(
-                              content.id,
-                              content.title,
-                              content.description,
-                              content.photo,
-                              content.place
+                              carousel.id,
+                              carousel.title,
+                              carousel.description,
+                              carousel.photo,
+                              carousel.place
                             )
                           }
                         >
@@ -343,7 +304,7 @@ const ContentData = () => {
                           className="flex flex-row gap-4"
                           size="sm"
                           color="failure"
-                          onClick={() => handleDelete(content.id)}
+                          onClick={() => handleDelete(carousel.id)}
                         >
                           <MdDelete />
                           Delete
@@ -363,4 +324,4 @@ const ContentData = () => {
   );
 };
 
-export default ContentData;
+export default CarouselData;

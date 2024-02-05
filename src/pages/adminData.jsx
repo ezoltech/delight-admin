@@ -6,7 +6,6 @@ import { MdDelete } from "react-icons/md";
 import { Loader } from "../components/Loader";
 import axios from "axios";
 import { BASE_URL } from "../utils/utils";
-import { ContentCommands } from "../components/contentCommands";
 import { LottieAnimation } from "../components/LottieAnimation";
 import { AdminCommands } from "../components/adminCommands";
 const AdminData = ({}) => {
